@@ -1,9 +1,4 @@
-import {
-  getAccounts,
-  getAccountBalance,
-  sendTx,
-  subscribeAccountsChangeEvent,
-} from "astra-wallet-sdk";
+import { getAccounts, getAccountBalance, sendTx, subscribeAccountsChangeEvent } from "astra-wallet-sdk";
 
 subscribeAccountsChangeEvent(async (updatedAccounts) => {
   const balance = await getAccountBalance(updatedAccounts[0].address);
@@ -41,7 +36,7 @@ document.sendForm.onsubmit = () => {
         senderAddress: accounts[0].address,
         amount,
       });
-      alert("Succeed to send tx:" + result.transactionHash);
+      alert("Succeed to send tx:" + Buffer.from(result.transactionHash).toString("hex").toUpperCase());
     } catch (error) {
       alert("Failed to send tx: " + error);
     }
